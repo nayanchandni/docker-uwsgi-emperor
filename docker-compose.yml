@@ -1,0 +1,24 @@
+ version: '2'
+ services:
+   web:
+     build:
+        context: .
+     volumes:
+       - ./docker-django:/usr/src/docker-django
+     expose:
+       - "3031"
+       - "3032"
+     command: uwsgi --emperor /usr/src/docker-django 
+
+   nginx:
+     restart: always
+     build: ./nginx/
+     ports:
+       - "80:80"
+       - "8080:8080"
+     volumes:
+       - /www/static
+     volumes_from:
+       - web
+     links:
+       - web:web

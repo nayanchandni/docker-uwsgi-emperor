@@ -4,11 +4,10 @@
      build:
         context: .
      volumes:
-       - ./docker-django:/usr/src/docker-django
+       - ./project:/usr/src/project
      expose:
        - "3031"
-       - "3032"
-     command: uwsgi --emperor /usr/src/docker-django 
+     command: uwsgi --ini /usr/src/project/web.ini 
 
    nginx:
      restart: always

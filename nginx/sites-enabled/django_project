@@ -3,7 +3,6 @@
 		server_name localhost;
 
 		location /{
-		include uwsgi_params;
 		uwsgi_pass web:3031;
 		proxy_redirect     off;
 	        proxy_set_header   Host $host;
@@ -15,19 +14,3 @@
 
 	}
 
-	server{
-		listen 8080;
-		server_name localhost;
-
-		location /{
-		include uwsgi_params;
-			uwsgi_pass web:3032;
-
-			proxy_redirect     off;
-	        proxy_set_header   Host $host;
-	        proxy_set_header   X-Real-IP $remote_addr;
-	        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-	        proxy_set_header   X-Forwarded-Host $server_name;	
-	}
-
-	}
